@@ -1,5 +1,5 @@
 #CalpiV1.py
-#蒙特卡罗方法
+#数学公式计算圆周率
 from time import perf_counter
 import math
 start = perf_counter()
