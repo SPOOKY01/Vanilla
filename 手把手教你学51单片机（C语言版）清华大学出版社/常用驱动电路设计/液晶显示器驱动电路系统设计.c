@@ -1,5 +1,5 @@
 #include<reg52.h>  //包含头文件，一般情况无需改动
-				   //头文件包含特殊功能寄存器的定义
+		           //头文件包含特殊功能寄存器的定义
 #include<intrins.h>
 sbit RS=P2^4;	   //定义端口
 sbit RW=P2^5;
@@ -46,7 +46,7 @@ void LCD_Write_Com(unsigned char com)
 	RW_CLR;
 	EN_SET;
 	DataPort = com;
-	_nop_();
+	_nop_(); 
 	EN_CLR;
 }
 //写入数据函数
