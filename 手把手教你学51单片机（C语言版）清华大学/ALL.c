@@ -45,3 +45,39 @@ void ConfigUART(unsigned int baud)
     ET1 = 0;
     TR1 = 1;
 }
+
+#include<reg52.c>//185
+
+void ConfigUART(unsigned int baud)
+
+void main()
+{
+    EA = 1;//
+    ConfigUART(9600);//配置波特
+    while(1);
+}
+//
+void ConfigUART(unsigned int baud)
+{
+    SCON = 0x50;//
+    TMOD &= 0x0F;
+    TMOD |= 0x20;
+    TH1 = 256 - (11059200/12/32)/baud;
+    TL1 = TH1;
+    ET1 = 0;
+    ES = 1;
+    TR1 = 1;
+}
+//
+void InterruptUART() interrput 4
+{
+    if(RI)
+    {
+        RI = 0;
+        SBUF = SBUF + 1;
+    }
+    if(TI)
+    {
+        TI = 0;
+    }
+}
