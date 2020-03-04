@@ -68,3 +68,39 @@ int main()
 
 
 #include<stdio.h>//9-5
+void fun(int *p1, int *p2)
+{
+    int temp;
+    temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+    printf("*p1 = %d， *p2 = %d\n", *p1, *p2);
+}
+int main()
+{
+    int a = 50,b = 100;
+    printf("a = %d, b = %d\n", a, b);
+    fun(&a, &b);
+    return 0;
+}
+
+
+
+
+#include<stdio.h>//9-6
+#include<string.h>
+char *strlong(char *str1, char *str2)
+{
+    if(strlen(str1) >= strlen(str2))
+    {
+        return str1;
+    }
+    else
+    {
+        return str2;
+    }
+}
+int main()
+{
+    
+}
