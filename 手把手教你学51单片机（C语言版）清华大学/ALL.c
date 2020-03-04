@@ -108,7 +108,102 @@ void StartRXD();
 
 void main()
 {
-	
+    EA = 1;
+    ConfigUART(9600);
+
+    while(1)
+    {
+        while(PIN_RXD);
+        StartRXD();
+        while(!RxdEnd);
+        StartTXD(RxdBuf + 1);
+        while(!TxdEnd);
+    }
+}
+/*串口配置函数。。。*/
+void ConfigUART(unsigned int baud)
+{
+    TMOD &= 0xF0;
+    TMOD |= 0x02;
+    TH0 = 256 - (11059200/12)/baud;
+}
+/*启动串行发送*/
+void StartRXD()
+{
+    TL0 = 256 - ((256 - TH0)>>1);
+    ET0 = 1;
+    TR0 = 1;
+    RxdEnd = 0;
+    RxdOrTxd = 0;
+}
+/*启动串行发送*/
+void StartTXD(unsigned char dat)
+{
+    TxdBuf = dat;
+    TL0 = TH0;
+    ET0 = 1;
+    TR0 = 1;
+    PIN_TXD = 0;
+    TxdEnd = 0;
+    RxdOrTxd = 1;
+}
+/*中断服务函数，处理串行发送和接收*/
+void InterruptTimer0() interrupt1
+{
+    static unsigned char cnt = 0;
+
+    if(RxdOrTxd)
+    {
+        cnt++;
+        if(cnt <= 8)
+        {
+            PIN_TXD = TxdBuf & 0x01;
+            TxdBuf >>= 1;
+        }
+        else if(cnt == 9)
+        {
+            PIN_TXD = 1;
+        }
+        else
+        {
+            cnt = 0;
+            TR0 = 0;
+            TxdEnd = 1;
+        }
+    }
+    else
+    {
+        if(cnt == 0)
+        {
+            if(!PIN_TXD)
+            {
+                RxdBuf = 0;
+                cnt++;
+            }
+            else
+            {
+                TR0 = 0;
+            }
+        }
+        else if(cnt <= 8)
+        {
+            RxdBuf >>=1;
+            if(PIN_RXD)
+            {
+                RxdBuf |= 0x80;
+            }
+            cnt++;
+        }
+        else
+        {
+            cnt = 0;
+            TR0 = 0;
+            if(PIN_RXD)
+            {
+                RxdEnd = 1;
+            }
+        }
+    }
 }
 #icnlude<reg52.h>//184
 
