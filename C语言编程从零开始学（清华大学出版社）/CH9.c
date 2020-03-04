@@ -102,5 +102,45 @@ char *strlong(char *str1, char *str2)
 }
 int main()
 {
-    
+    char str1[30], str2[30], *str;
+    gets(str1);
+    gets(str2);
+    str = strlong(str1, str2);
+    printf("最长字符串是: %s\n", str);
+    return 0;
+}
+
+
+
+
+#include<stdio.h>//9-7
+int *fun(int *x, int *y)
+{
+    if(*x > *y)
+    {
+        return x;
+    }
+    else
+    {
+        return y;
+    }
+}
+int main()
+{
+    int a,b;
+    int *p;
+    printf("请输入两个整数:\n");
+    scanf("%d%d", &a, &b);
+    p = fun(&a, &b);
+    printf("指针变量指向最大值为: %d\n", *p);
+    return 0;
+}
+
+
+
+
+#include<stdio.h>//9-8
+int *fun(int x, int y)
+{
+    if()
 }
