@@ -92,6 +92,64 @@ void InterruptTime0() iterrupt 1
         default:break;
     }
 }
+
+
+
+
+#include<reg52.h>//145
+
+sbit BUZZ = P1^6;
+unsigned char T0RH = 0;
+unsigned char T0RL = 0;
+
+void OpenBuzz(unsigned int frequ);
+void StopBuzz()
+
+void mian()
+{
+    unsigned int i;
+
+    TMOD = 0x01;
+    EA = 1;
+
+    while(1)
+    {
+        OpenBuzz(4000);
+        for(i = 0; i<40000; i++);
+        StopBuzz();
+        for(i = 0; i<40000; i++);    
+        OpenBuzz(1000);
+        for(i = 0; i<40000; i++);
+        StopBuzz();
+        for(i = 0; i<40000; i++);
+    }
+}
+/*蜂鸣器启动函数*/
+void OpenBuzz(unigned int frequ)
+{
+    unsigned int reload;
+
+    reload = 65536 - (110592/12)/(frequ*2);
+    T0RH = (unsigned char)(reload>>8);
+    T0RH = (unsigned char)reload;
+    TH0 = 0xFF;
+    TL0 = 0xFF;
+    ET0 = 1;
+    TR0 = 1;
+}
+/*蜂鸣器停止函数*/
+void StopBuzz()
+{
+    ET0 = 0;
+    TR0 = 0;
+}
+/*~~~*/
+void InterruptTimer0() interrupt 1
+{
+    TH0 = TORH;
+    TL0 = TORL;
+    BUZZ = ~BUZZ;
+}
 #include<reg52.h>//179
 sbit PIN_RXD = P3^0;//接收引脚定义
 sbit PIN_TXD = P3^1;//发送引脚定义
