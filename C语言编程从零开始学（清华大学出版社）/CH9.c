@@ -16,3 +16,55 @@ int main()
 
 
 #include<stdio.h>//9-2
+int main()
+{
+    int a = 33, b = 22, c = 55;
+    int *p = &a;
+    *p = b;
+    c = *p;
+    printf("输出修改后的值:\n");
+    printf("a = %d,b = %d,c = %d,*p = %d\n", a, b, c, *p);
+    return 0;
+}
+
+
+
+
+#include<stdio.h>//9-3
+int main()
+{
+    int a = 10, b = 9, temp;
+    int *pa = &a, *pb = &b;
+    printf("a = %d, b = %d\n", a, b);
+    temp = *pa;
+    *pa = *pb;
+    *pb = temp;
+    printf("a = %d, b = %d\n", a, b);
+    return 0;
+}
+
+
+
+
+#include<stdio.h>//9-4
+void fun(innt a, int b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+    printf("交换后:a = %d, b = %d\n", a, b);
+}
+int main()
+{
+    int a = 50, b = 100;
+    printf("交换前:a = %d, b = %d\n", a, b);
+    fun(a, b);
+    printf("a = %d, b = %d\n", a, b);
+    return 0;
+}
+
+
+
+
+#include<stdio.h>//9-5
