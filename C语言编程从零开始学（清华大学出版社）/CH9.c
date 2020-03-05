@@ -327,3 +327,12 @@ int main()
 
 
 #include<stdio.h>//9-16
+void fun(int b[], int n)
+{
+    int temp,i,j,k;
+    k = (n-1)/2;
+    for(i = 0;i<=k;i++)
+    {
+        
+    }
+}
