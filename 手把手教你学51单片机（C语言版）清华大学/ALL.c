@@ -327,3 +327,17 @@ void InterruptUART() interrput 4
         TI = 0;
     }
 }
+
+
+
+
+#include<reg52.h>//209
+#define LCD1602_DB P0
+sbit LCD1602_RS = P1^0;
+sbit LCD1602_RW = P1^1;
+sbit LCD1602_E = P1^5;
+
+void IntLcd1602();
+void LcdShowStr(unsigned char x, unsigned char y, unsigned char *str);
+
+void main()
