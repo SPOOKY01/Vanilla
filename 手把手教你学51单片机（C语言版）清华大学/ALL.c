@@ -341,3 +341,127 @@ void IntLcd1602();
 void LcdShowStr(unsigned char x, unsigned char y, unsigned char *str);
 
 void main()
+{
+    unsigned char str[] = "Kingst Studio";
+
+    InitLcd1602();
+    LcdShowStr(2, 0, str);
+    LcdShouStr(0, 1, "Welcome to EDD");
+    while(1);
+}
+//等待液晶准备好
+void LcdWaitReady()
+{
+    unsigned char sta;
+
+    LCD1602_DB = 0xFF;
+    LCD1602_RS = 0;
+    LCD1602_RW = 1;
+    do
+    {
+        LCD1602_E = 1;
+        sta = LCD1602_DB;
+        LCD1602_E = 0;
+    }
+    while(sta & 0x80);
+}
+//
+void LcdWriteCmd(unsigned char amd)
+{
+    LcdWaitReady();
+    LCD1602_RS = 0;
+    LCD1602_RW = 0;
+    LCD1602_DB = cmd;
+    LCD1602_E = 1;
+    LCD1602_E = 0;
+}
+//
+void LcdWriteDat(unsigned char dat)
+{
+    LcdWriteReady();
+    LCD1602_RS = 1;
+    LCD1602_RW = 0;
+    LCD1602_DB = dat;
+    LCD1602_E = 1;
+    LCD1602_E = 0;
+}
+//
+void LcdSetCursor(unsiged char x, unsigned char y)
+{
+    unsigned char addr;
+
+    if(y == 0)
+    {
+        addr = 0x00 + x;
+    }
+    else
+    {
+        addr = 0x40 + x;
+    }
+    LcdWriteCmd(addr | 0x80);
+}
+//
+void LcdShowStr(unsigned char x, unsigned char y, unsigned char *str)
+{
+    LcdSetCursor(x, y);
+    while(*str != '\0')
+    {
+        LcdWriteDat(* str++);
+    }
+}
+//初始化LCD1602
+void InitLcd1602()
+{
+    LcdWriteCmd(0x38);
+    LcdWriteCmd(0x0C);
+    LcdWriteCmd(0x06);
+    LcdWriteCmd(0x01);
+}
+
+
+
+
+#include<reg52.h>//215
+
+#define LCD1602_DB P0
+sbit LCD1602_RS = P1^0;
+sbit LCD1602_RW = P1^1;
+sbit LCD1602_E = P1^5;
+
+bit flag500ms = 0;
+unsigned char T0RH = 0;
+unsigned char T0RL = 0;
+//
+unsigned char code str2[] = "MEOWME OWMEOW";
+//
+unsigned char code str2[] = "Let's move\\\";
+
+void ConfigTimer0(unsigned int ms);
+void InitLcd1602();
+void LcdShowStr(unsigned char x, unsigned char y, unsigned char *str, unsigned char len);
+
+void main()
+{
+    unsigned char i;
+    unsigned char index = 0;
+    unsigned char pdat bufMovel[16+sizeof(str1) + 16];
+    unsigned char pdat bufMove2[16+sizeof(str1) + 16];
+    
+    EA = 1;
+    ConfigTimer0(10);
+    IntLcd1602();
+    //
+    for(i = 0; i<16; i++)
+    {
+        bufMove1[i] = ' ';
+        bufMove2[i] = ' ';
+    }
+    //
+    for(i = 0;i<(sizeof(str1) - 1); i++)
+    {
+        bufMove1[16+i] = str1[i];
+        bufMove2[16+i] = str2[i];
+    }
+    //
+    for(i = ())
+}
