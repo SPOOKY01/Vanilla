@@ -1,33 +1,3 @@
-#include<reg52.h>//60
-sbit LED = P0^0;
-sbit ???
-???
-void main()
-{
-    unsigned char cnt = 0;//
-
-    ENLED = 0;//74HC138
-    TMOD = 0x01;
-    TH0 = 0xB8;
-    TL0 = 0X00;
-    TR0 = 1;
-
-    while(1)
-    {
-        if(TF0 == 1)
-        {
-            TF0 = 0;
-            TH0 = 0xB8;
-            TL0 = 0x00;
-            cnt++;
-            if(cnt >= 50)
-            {
-                cnt = 0;
-                LED = ~LED;
-            }
-        }
-    }
-}
 #include<reg52.h>//79
 sbit --------;
 unsigned char code LedChar[] = 
