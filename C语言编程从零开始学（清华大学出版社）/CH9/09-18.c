@@ -13,10 +13,10 @@ int main()
         printf("\n");
     }
     printf("%d,%d\n",a,*a);
-    printf("%d,%d\n",a[0],*(a=0));
+    printf("%d,%d\n",a[0],*(a+0));
     printf("%d,%d\n",&a[0],&a[0][0]);
     printf("%d,%d\n",a[1],a+1);
-    printf("%d,%d\n",&a[1][0],*(a=1)+0);
+    printf("%d,%d\n",&a[1][0],*(a+1)+0);
     printf("%d,%d\n",a[2],*(a+2));
     printf("%d,%d\n",&a[2],a+2);
     printf("%d,%d\n",a[1][0],*(*(a+1)+0));
