@@ -1,0 +1,76 @@
+#include<stdio.h>
+int main()
+{
+	int a,b,c,t;
+	printf("请输入三个整数:");
+	scanf("%d %d %d",&a,&b,&c);
+	if(a!=b)
+	{
+		if(a!=c)
+		{
+			if(b!=c)
+			{
+				if(a>b)
+				{
+					t=a;
+					a=b;
+					b=t;
+				}
+				if(a>c)
+				{
+					t=a;
+					a=c;
+					c=t;
+				}
+				if(b>c)
+				{
+					t=b;
+					b=c;
+					c=t;
+				}
+				printf("%d<%d<%d\n",a,b,c);
+			}
+			else
+			{
+				if(a<b)
+				{
+					printf("%d<%d=%d\n",a,b,c);
+				}
+				else
+				{
+					printf("%d=%d<%d\n",b,c,a);
+				}
+			}
+		}
+		else
+		{
+			if(a>b)
+			{
+				printf("%d<%d=%d\n",b,a,c);
+			}
+			else
+			{
+				printf("%d=%d<%d\n",a,c,b);
+			}
+		}
+	}
+	else
+	{
+		if(b==c)
+		{
+			printf("%d=%d=%d\n",a,b,c);
+		}
+		else
+		{
+			if(b<c)
+			{
+				printf("%d=%d<%d\n",a,b,c);
+			}
+			else
+			{
+				printf("%d<%d=%d\n",c,a,b);
+			}
+		}
+	}
+	return 0;
+}
