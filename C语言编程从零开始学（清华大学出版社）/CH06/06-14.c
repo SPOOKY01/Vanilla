@@ -7,12 +7,9 @@ int main()
     for(i = 0;i<10;i++)
     {
         scanf("%d", &j);
-        if(j<0)
+        if(j<0)continue;
         {
-            continue;
-            {
             sum = sum + j;
-            }
         }
     }
     printf("sum=%d\n",sum);
