@@ -8,7 +8,7 @@ int main()
     fun(a, b);
     return (0);//
 }
-void(int a, int b)
+void fun(int a, int b)
 {
     int tmp;
     tmp = a;
