@@ -9,7 +9,7 @@ int main()
    int j = 0;
    while(j<4)
    {
-       printf("*            *\n");
+       printf("*             *\n");
        j++;
    }
    for(int l=0;l<15;l++)
