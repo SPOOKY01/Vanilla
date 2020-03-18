@@ -9,6 +9,6 @@ int main()
         int c = 8;
         printf("%d\n", c);
     }
-    printf("%d\n", c)'
+    printf("%d\n", c);
     return 0;
 }
