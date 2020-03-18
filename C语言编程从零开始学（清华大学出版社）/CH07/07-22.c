@@ -8,7 +8,7 @@ int fun(int n, int i, int j, int k)
         for(j=1;j<=i;j++)
         {
             k = i*j;
-            printf("%d*%dx=%2d  ", j, i, k);
+            printf("%d*%d=%2d  ", j, i, k);
         }
         printf("\n");
     }
