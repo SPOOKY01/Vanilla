@@ -1,4 +1,23 @@
 #include<stdio.h>
+void fun(int b[], int n)
+{
+    int  i,j,k,temp;
+    for(i=1;i<=n-1;i++)
+    {
+        k = 0;
+        for(j=1;j<n-1;j++)
+        {
+            if(b[k] < b[j])
+            {
+                k = j;
+            }
+            temp = b[k];
+            b[k] = b[n-i];
+            b[n-i] = temp;
+        }
+    }
+    printf("形式参数b的值:%#x,地址: %#x\n", b, &b);
+}
 int main()
 {
       int a[5] = {3,5,4,1,2};
@@ -18,23 +37,4 @@ int main()
       }
       printf("\n");
       return 0;
-}
-void fun(int b[], int n)
-{
-    int  i,j,k,temp;
-    for(i=1;i<=n-1;i++)
-    {
-        k = 0;
-        for(j=1;j<n-1;j++)
-        {
-            if(b[k] < b[j])
-            {
-                k = j;
-            }
-            temp = b[k];
-            b[k] = b[n-i];
-            b[n-i] = temp;
-        }
-    }
-    printf("形式参数b的值:%#x,地址: %#x\n", b, &b);
 }
