@@ -27,3 +27,22 @@ while True:
 	    pwm.start(i)              #启动pwm
 	    time.sleep(0.05)           #延时
 '''
+
+
+'''
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(2,GPIO.OUT)
+
+while True:
+    time.sleep(2)
+    GPIO.output(2,GPIO.HIGH)
+    print("H")
+    
+    time.sleep(2)
+    GPIO.output(2,GPIO.LOW)
+    print("L")
+'''
